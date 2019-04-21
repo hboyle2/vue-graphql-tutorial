@@ -8,6 +8,11 @@ type Query {
   Wizards: [Characters!]
 }
 
+ type Mutation {
+    createWizard(name: String, house: String, image: String ): Characters!
+    
+  }
+
 type Characters {
   id: Int
   name: String
@@ -22,11 +27,23 @@ type Wand {
   wood: String
 }
 `;
+let idCount = list.length;
 
 const resolvers = {
   Query: {
     Wizards: () => {
       return list;
+    }
+  },
+  Mutation: {
+    createWizard: (parent, args) => {
+      const link = {
+        id: ++idCount,
+        name: args.name,
+        image: args.image
+      };
+      list.push(link);
+      return link;
     }
   }
 };
