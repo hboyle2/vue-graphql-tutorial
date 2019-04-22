@@ -12,7 +12,7 @@
 
 
 <script>
-import { CREATE_WIZARD } from "./constants/graphql";
+import { CREATE_WIZARD, WIZARD_QUERY } from "./constants/graphql";
 export default {
   name: "CreateWizard",
   data() {
@@ -25,14 +25,30 @@ export default {
   methods: {
     createWizard() {
       const { name, image, house } = this.$data;
-      this.$apollo.mutate({
-        mutation: CREATE_WIZARD,
-        variables: {
-          name,
-          image,
-          house
-        }
-      });
+      this.$apollo
+        .mutate({
+          mutation: CREATE_WIZARD,
+          variables: {
+            name,
+            image,
+            house
+          },
+          update: (store, { data: { createWizard } }) => {
+            console.log(data);
+            const data = store.readQuery({
+              query: WIZARD_QUERY
+            });
+            console.log(data);
+            data.Wizards.push(createWizard);
+            store.writeQuery({ query: WIZARD_QUERY, data });
+          }
+        })
+        .then(data => {
+          this.$router.push({ path: "/" });
+        })
+        .catch(error => {
+          console.error(error);
+        });
     }
   }
 };
