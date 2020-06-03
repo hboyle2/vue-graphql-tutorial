@@ -1,0 +1,17 @@
+type Mutation {
+    createWizard(name: String,  image: String ): Characters!
+    
+
+let idCount = list.length + 1;
+
+Mutation: {
+    createWizard: (parent, args) => {
+      const link = {
+        id: ++idCount,
+        name: args.name,
+        image: args.image
+      };
+      list.push(link);
+      return link;
+    }
+}

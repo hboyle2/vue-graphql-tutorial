@@ -1,0 +1,58 @@
+🦄🦄🦄🦄🦄🦄🦄🦄
+MAKE CONSTANTS FOLDER
+graphql.js
+import gql from 'graphql-tag'
+
+export const WIZARD_QUERY = gql`
+  {
+    Wizards {
+      image
+      house
+      name
+    }
+  }
+`
+
+
+
+🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄🦄
+<template>
+  <div id="container">
+  
+    <h4 v-if="loading">Loading...</h4>
+    <wizard v-for="wizard in Wizards" :key="wizard.id" :wizard="wizard"></wizard>
+  </div>
+</template>
+
+
+
+
+<script>
+import Wizard from "./Wizard";
+import { WIZARD_QUERY } from "../constants/graphql"; 🦄🦄🦄🦄🦄🦄🦄🦄
+export default {
+  name: "WizardList",
+  data() {
+    return {
+      Wizards: [] 🦄🦄🦄🦄🦄🦄🦄🦄
+    };
+  },
+  components: {
+    Wizard
+  },
+  apollo: { 🦄🦄🦄🦄🦄🦄🦄🦄
+    Wizards: {  🦄🦄🦄🦄🦄🦄🦄🦄
+      query: WIZARD_QUERY 
+    }
+  }
+};
+</script>
+
+<style>
+#container {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+</style>

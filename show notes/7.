@@ -1,0 +1,18 @@
+ update: (store, { data: { createWizard } }) => {
+          const data = store.readQuery({
+            query: WIZARD_QUERY
+          });
+          console.log(data);
+          data.Wizards.push(createWizard);
+          store.writeQuery({ query: WIZARD_QUERY, data });
+        }
+
+
+ROUTING:
+
+ .then(data => {
+          this.$router.push({ path: "/" });
+        })
+        .catch(error => {
+          console.error(error);
+        });
