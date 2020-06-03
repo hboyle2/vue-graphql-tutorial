@@ -1,0 +1,47 @@
+
+⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️
+
+export const CREATE_WIZARD = gql`
+  mutation createWizard($name: String, $image: String, $house: String) {
+    createWizard(name: $name, image: $image, house: $house) {
+      name
+      image
+      house
+    }
+  }
+`
+
+⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️
+
+CreateWizard.vue
+
+
+<script>
+import {  CREATE_WIZARD } from "../constants/graphql.js";
+export default {
+  name: "CreateWizard",
+  data() {
+    return {
+      name: "",
+      image: "",
+      house: ""
+    };
+  },
+  methods: {
+    createWizard() {
+      const { name, image, house } = this.$data;
+      this.$apollo
+        .mutate({
+          mutation: CREATE_WIZARD,
+          variables: {
+            name,
+            image,
+            house
+          }
+        
+        })
+    
+    }
+  }
+};
+</script>

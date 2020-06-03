@@ -1,0 +1,33 @@
+const WizardList = require("./WizardList");
+
+let list = WizardList.WizardList;
+
+const typeDefs = `
+  type Query {
+    Wizards:[Characters!] 
+ }                                                                                       
+
+  type Characters {
+   id: String
+   name: String
+   house : String
+   wand : Wand
+   ancestry: String
+   image: String
+   species: String
+  }
+
+  type Wand {
+    wood: String
+    core: String
+    length: Int
+  }
+
+
+`const resolvers = {
+  Query: {
+    Wizards: () => {
+      return list;
+    }
+  }
+};
